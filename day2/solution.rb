@@ -7,19 +7,19 @@ def addValidIds ()
 end
 
 def analyzeRow (row)
+    maxGreen = 0
+    maxRed = 0
+    maxBlue = 0
+
     nGreen = 0
     nRed = 0
     nBlue = 0
     id, i = getNextNum(row, 0)
     while i <= row.length
         if row[i] == ';'
-            if nRed > 12 || nGreen > 13 || nBlue > 14
-                return 0
-            else
-                nGreen = 0
-                nRed = 0
-                nBlue = 0
-            end
+            nGreen = 0
+            nRed = 0
+            nBlue = 0
         end
 
         num, i = getNextNum(row, i + 1)
@@ -31,12 +31,12 @@ def analyzeRow (row)
         elsif color == 'blue'
             nBlue += num
         end
+
+        maxGreen = [maxGreen, nGreen].max
+        maxRed = [maxRed, nRed].max
+        maxBlue = [maxBlue, nBlue].max
     end
-    if nRed > 12 || nGreen > 13 || nBlue > 14
-        return 0
-    end
-    puts "id is: " + String(id) + " nGreen: " + String(nGreen) + " nRed: " + String(nRed) + " nBlue: " + String(nBlue)
-    return id
+    return maxGreen * maxRed * maxBlue
 end
 
 # returns the next (not really lol) integer and the index of its pos of given row
