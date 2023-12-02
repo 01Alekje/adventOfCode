@@ -1,3 +1,3 @@
 # adventOfCode
 
-Dont judge me, I haven't used ruby for 3 years. 
+Just becauase you don't like the code doesn't mean it's not perfectly optimized, readable, good, beautiful and perfect. Skill issue
