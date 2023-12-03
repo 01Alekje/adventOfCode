@@ -19,7 +19,31 @@ end
 # recieves top, current and bottom row. 
 # Returns part-numbers for currentRow
 def getRowNumbers (topRow, currentRow, bottomRow)
-    num, startIndex, endIndex = getNextNum(currentRow, 0)
+    totNum = 0
+    endIndex = 0
+    while endIndex < currentRow.length
+        num, startIndex, endIndex = getNextNum(currentRow, endIndex)
+        if checkRow(topRow, startIndex, endIndex)
+            totNum += num
+        elsif checkRow(currentRow, startIndex, endIndex)
+            totNum += num
+        elsif checkRow(bottomRow, startIndex, endIndex)
+            totNum += num
+        end
+    end
+    puts "total for " + currentRow + " is " + String(totNum)
+    totNum
+end
+
+def checkRow (row, nSIndex, nEIndex)
+    if row.length == 0 then return false end
+    if nSIndex > 0 then nSIndex = nSIndex - 1 end
+    while nSIndex <= nEIndex # add equal here
+        if row[nSIndex] == nil then return false end
+        if !row[nSIndex].match? /\A\d+\z/ and row[nSIndex] != '.' then return true end
+        nSIndex += 1
+    end
+    false
 end
 
 # returns first number, index of where it starts (t), and index where it ends (i)
@@ -39,8 +63,8 @@ def getNextNum (row, startIndex)
         end
         i += 1
     end
-    return -1, t, i
+    if num.length == 0 then return 0, t, i end
+    return Integer(num), t, i
 end
 
-#addPartNumbers()
-puts getNextNum('.664.598..', 0)
+puts addPartNumbers()
