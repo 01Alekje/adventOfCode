@@ -18,15 +18,11 @@ def analyzeRow (row)
     end
     i = 0
     totPoints = 0
-    #puts "matching: " + String(matching)
     while matching > 0
-        #puts "totPoints: " + String(totPoints)
         if totPoints == 0
             totPoints = 1
-            #puts "added 1 because 0"
         else
             totPoints += totPoints
-            #puts "doubled because more than zero"
         end
         matching -= 1
     end
